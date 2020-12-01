@@ -1,0 +1,46 @@
+{
+	"folders": [
+		{
+			"path": "../../../../WesBossClass"
+		},
+		{
+			"path": "../../../../kata"
+		},
+		{
+			"path": "../../../../sailCalc"
+		},
+		{
+			"path": "../../../../whaleSong"
+		},
+		{
+			"path": "../../../../classes/interview prep/AlgoCasts-master"
+		},
+		{
+			"path": "../../../../expressTest"
+		},
+		{
+			"path": "../../../../nodeCrashCourse"
+		},
+		{
+			"path": "../../../../greenSock"
+		},
+		{
+			"path": "../../../../classes/REACT/ReactFullStack/project"
+		},
+		{
+			"path": "../../../../scrimba"
+		},
+		{
+			"path": "../../../../mjpuppet/mjpuppet 2.0"
+		},
+		{
+			"path": "../../../../Janna"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "sailCalc"
+	}
+}
