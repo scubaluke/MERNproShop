@@ -13,9 +13,6 @@
 			"path": "../../../../whaleSong"
 		},
 		{
-			"path": "../../../../classes/interview prep/AlgoCasts-master"
-		},
-		{
 			"path": "../../../../expressTest"
 		},
 		{
@@ -38,9 +35,15 @@
 		},
 		{
 			"path": "../.."
+		},
+		{
+			"path": "../../../../reactBootcamp"
+		},
+		{
+			"path": "../../../../portfolio"
 		}
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "sailCalc"
+		"liveServer.settings.multiRootWorkspaceName": "portfolio"
 	}
 }
