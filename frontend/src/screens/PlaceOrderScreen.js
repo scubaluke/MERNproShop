@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect} from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
+import { createOrder } from '../actions/orderActions'
 
-
-export default function PlaceOrderScreen() {
+export default function PlaceOrderScreen({history}) {
+    const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
 
 // calculate prices:
@@ -23,9 +24,26 @@ function addDecimals(num) {
 // total price 
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
   
+    const orderCreate = useSelector(state => state.orderCreate)
+    const { order, success, error } = orderCreate
+
+    useEffect(() => {
+        if(success) {
+            history.push(`/order/${order._id}`)
+        }
+// eslint-disable-next-line 
+    }, [history, success])
 
     function placeOrderHandler() {
-        console.log('placed order');
+        dispatch(createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: cart.shippingAddress,
+            paymentMethod: cart.paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+        }))
     }
 
     return (
@@ -111,6 +129,9 @@ function addDecimals(num) {
                                 <Col>${cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+                                <ListGroup.Item>{error && <Message variant='danger' >{error}</Message>}
+                                </ListGroup.Item>
+
                             <ListGroup.Item>
                                 <Button type='button' className='btn-block' disabled={cart.cartItems === 0 } onClick={placeOrderHandler} >
                                     Place Order
