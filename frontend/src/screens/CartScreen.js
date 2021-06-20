@@ -46,7 +46,7 @@ history.push('/login?redirect=shipping')
                                         <Link to={`/product/${item.product}`}>{item.name}</Link>
                                     </Col>
                                     <Col md={2} >${item.price}</Col>
-                                    <Col md={2} >
+                                    <Col md={2} className="product-page-section" >
                                     <Form.Control 
                                     as='select' 
                                     value={item.qty} 
