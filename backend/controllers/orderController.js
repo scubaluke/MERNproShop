@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
+import User from '../models/userModel.js'
 
 // @desc Create new order
 // @route POST /api/orders 
@@ -23,12 +24,14 @@ const addOrderItems = asyncHandler(async (req, res) => {
         shippingPrice, 
         totalPrice
        })
+
+
         try {
-            const createdOrder = await order.save(function(err, doc) {
+          await order.save(function(err, doc) {
                 if (err) return console.error(err);
-                console.log("Document inserted successfully!");
+                // console.log("Document inserted successfully!", doc);
+                res.status(201).json(doc)
               })
-            res.status(201).json(createdOrder)
         } catch (error) {
             console.error(error);
         }
@@ -40,7 +43,13 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @access  private 
 
 const getOrderById = asyncHandler(async (req, res) => {
-   const order = await Order.findById(req.params.id).populate('User', 'name email')
+    console.log('getorderById ran');
+   const order = await Order.findById(req.params.id).populate(
+    'user',
+    'name email',
+    User
+  )
+  console.log(await order);
 
    if(order) {
        res.json(order)
