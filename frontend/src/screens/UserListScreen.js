@@ -26,7 +26,7 @@ export default function UserListScreen({ history }) {
             history.push('/login')
         }
       
-    }, [dispatch, history, successDelete])
+    }, [dispatch, history, successDelete, userInfo])
 
     function deleteHandler(id) {
         if(window.confirm('Are you sure you want to permanently delete this user?')) {
@@ -59,7 +59,7 @@ return (
                               )}
                           </td>
                             <td>
-                                <LinkContainer to={`/user/${user._id}/edit`} >
+                                <LinkContainer to={`/admin/user/${user._id}/edit`} >
                                     <Button  variant='light' className='btn-sm' >
                                         <i className='fas fa-edit' ></i>
                                     </Button>
