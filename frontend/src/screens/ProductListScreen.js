@@ -4,13 +4,16 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct } from '../actions/productActions'
 
 export default function ProductListScreen({ history, match }) {
     const dispatch = useDispatch()
 
     const productList = useSelector(state => state.productList) 
     const { loading, error, products } = productList
+
+    const productDelete = useSelector(state => state.productDelete) 
+    const {  error, products } = productDelete
 
     const userLogin = useSelector(state => state.userLogin) 
     const { userInfo } = userLogin
@@ -29,7 +32,7 @@ export default function ProductListScreen({ history, match }) {
 
     function deleteHandler(id) {
         if(window.confirm('Are you sure you want to permanently delete this user?')) {
-            // delete products
+            dispatch(deleteProduct(id))
         }
      }
 
