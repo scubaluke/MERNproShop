@@ -13,12 +13,10 @@ export default function ProductListScreen({ history, match }) {
     const { loading, error, products } = productList
 
     const productDelete = useSelector(state => state.productDelete) 
-    const {  error, products } = productDelete
+    const {loading: loadingDelete,  error: errorDelete, success: successDelete } = productDelete
 
     const userLogin = useSelector(state => state.userLogin) 
     const { userInfo } = userLogin
-
-
 
 
     useEffect(() => {
@@ -28,7 +26,7 @@ export default function ProductListScreen({ history, match }) {
             history.push('/login')
         }
       
-    }, [dispatch, history, userInfo])
+    }, [dispatch, history, userInfo, successDelete])
 
     function deleteHandler(id) {
         if(window.confirm('Are you sure you want to permanently delete this user?')) {
@@ -51,7 +49,8 @@ return (
             </Button>
           </Col>
       </Row>
-
+    {loadingDelete && <Loader />}
+    {errorDelete && <Message variant='danger'>{errorDelete}</Message> }
       {loading ? <Loader /> : error  ? <Message variant='danger'>{error}</Message> : (
           <Table striped  bordered hover responsive className='table-sm' >
               <thead>
