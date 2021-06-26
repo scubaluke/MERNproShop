@@ -30,7 +30,7 @@ export default function ProductListScreen({ history, match }) {
         }
 
         if(successCreate) {
-            history.push(`/admin/product/${createProduct._id}/edit`)
+            history.push(`/admin/product/${createdProduct._id}/edit`)
         } else {
             dispatch(listProducts())
         }

@@ -91,16 +91,21 @@ export const createProduct = () => async (dispatch, getState) => {
             }
         }
        
-        const {data} = await axios.post(`/api/products`, {}, config)
+        const { data } = await axios.post(`/api/products`, {}, config)
+
         dispatch({
             type: PRODUCT_CREATE_SUCCESS,
             payload: data
         })
 
     } catch (error) {
+        const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
         dispatch({
             type: PRODUCT_CREATE_FAIL,
-            payload: error.response && error.response.data.message ? error.response.data.message : error.message
+            payload: message
         })
     }
 } 
