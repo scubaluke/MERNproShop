@@ -4,7 +4,8 @@ import { Table, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProducts, deleteProduct } from '../actions/productActions'
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 export default function ProductListScreen({ history, match }) {
     const dispatch = useDispatch()
@@ -18,15 +19,23 @@ export default function ProductListScreen({ history, match }) {
     const userLogin = useSelector(state => state.userLogin) 
     const { userInfo } = userLogin
 
+    const productCreate = useSelector(state => state.productCreate) 
+    const {loading: loadingCreate,  error: errorCreate, success: successCreate, product: createdProduct } = productCreate
 
     useEffect(() => {
-        if(userInfo && userInfo.isAdmin) {
-            dispatch(listProducts())
-        } else {
+        dispatch({ type: PRODUCT_CREATE_RESET })
+
+        if(! userInfo.isAdmin) {
             history.push('/login')
         }
+
+        if(successCreate) {
+            history.push(`/admin/product/${createProduct._id}/edit`)
+        } else {
+            dispatch(listProducts())
+        }
       
-    }, [dispatch, history, userInfo, successDelete])
+    }, [dispatch, history, userInfo, successDelete, successCreate, createdProduct])
 
     function deleteHandler(id) {
         if(window.confirm('Are you sure you want to permanently delete this user?')) {
@@ -35,8 +44,8 @@ export default function ProductListScreen({ history, match }) {
      }
 
      function createProductHandler() {
-         console.log('createProductHandler clicked');
-     }
+        dispatch(createProduct())
+    }
 return (
       <>
       <Row className='align-items-center' >
@@ -51,6 +60,8 @@ return (
       </Row>
     {loadingDelete && <Loader />}
     {errorDelete && <Message variant='danger'>{errorDelete}</Message> }
+    {loadingCreate && <Loader />}
+    {errorCreate && <Message variant='danger'>{errorCreate}</Message> }
       {loading ? <Loader /> : error  ? <Message variant='danger'>{error}</Message> : (
           <Table striped  bordered hover responsive className='table-sm' >
               <thead>
