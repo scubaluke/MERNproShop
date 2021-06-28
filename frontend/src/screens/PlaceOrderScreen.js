@@ -5,10 +5,13 @@ import { Link } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
 import Message from '../components/Message'
 import { createOrder } from '../actions/orderActions'
+// import { CART_RESET } from '../constants/cartConstants'
+import { clearCart } from '../actions/cartActions';
 
 export default function PlaceOrderScreen({history}) {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
+    console.log('cart in  placeOrderScreen', cart);
   
 
 // calculate prices:
@@ -32,6 +35,8 @@ function addDecimals(num) {
     useEffect(() => {
         if(success) {
             history.push(`/order/${order._id}`)
+            console.log('cart', cart);
+            dispatch(clearCart(cart))
         }
 // eslint-disable-next-line 
     }, [history, success])

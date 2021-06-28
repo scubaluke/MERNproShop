@@ -3,33 +3,39 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import Message from '../components/Message'
-import { addToCart, removeFromCart } from '../actions/cartActions';
-
+import { addToCart, clearCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = ({ match, location, history }) => {
     const productId = match.params.id 
-
-        const qty = location.search ? Number(location.search.split('=')[1]) : 1
+    const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
     const dispatch = useDispatch()
 
     const cart = useSelector(state => state.cart)
-
     const { cartItems } = cart
+    console.log('cart', cart);
+    console.log('cartItems', cartItems);
+
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+    console.log(userInfo);
 
     useEffect(() => {
         if(productId) {
             dispatch(addToCart(productId, qty))
         }
-    }, [dispatch, productId, qty])
+        if(!userInfo) {
+            dispatch(clearCart(cart))
+        }
+    }, [dispatch, productId, qty, userInfo])
 
-const removeFromCartHandler = id => {
-    dispatch(removeFromCart(id))
-}
+    const removeFromCartHandler = id => {
+        dispatch(removeFromCart(id))
+    }
 
-const checkoutHandler = () => {
-history.push('/login?redirect=shipping')
-}
+    const checkoutHandler = () => {
+    history.push('/login?redirect=shipping')
+    }
     return (
         <Row>
             <Col md={8}>
