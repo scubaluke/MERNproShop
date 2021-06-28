@@ -33,6 +33,9 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
     localStorage.removeItem('userInfo')
+    localStorage.removeItem('cartItems')
+    localStorage.removeItem('shippingAddress')
+    localStorage.removeItem('paymentMethod')
     dispatch({ type:  USER_LOGOUT })
     dispatch({ type:  USER_DETAILS_RESET })
     dispatch({ type:  ORDER_LIST_MY_RESET })
@@ -121,6 +124,12 @@ export const UpdateUserProfile = (user) => async (dispatch, getState) => {
             type: USER_UPDATE_PROFILE_SUCCESS,
             payload: data,
         })
+        dispatch({
+            type: USER_LOGIN_SUCCESS,
+            payload: data,
+        })
+
+        localStorage.setItem('userInfo', JSON.stringify(data))
 
    
     } catch (error) {
