@@ -43,8 +43,6 @@ export const savePaymentMethod = data => (dispatch) => {
 }
 
 export const clearCart = (data) => (dispatch) => {
-  console.log('clear data');
-  console.log(data);
   delete data.cartItems
   dispatch({
     type: CART_RESET,

@@ -34,8 +34,6 @@ export const cartReducer = (state = { cartItems: [], shippingAddress: {} } , act
                     paymentMethod: action.payload,
                 }
             case CART_RESET:
-                console.log('state', state);
-                console.log('action.payload', action.payload);
                return { ...state, cartItems: [] }
         default: return state
     }

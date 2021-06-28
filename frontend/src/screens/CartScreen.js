@@ -13,12 +13,12 @@ const CartScreen = ({ match, location, history }) => {
 
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
-    console.log('cart', cart);
-    console.log('cartItems', cartItems);
+    // console.log('cart', cart);
+    // console.log('cartItems', cartItems);
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-    console.log(userInfo);
+    // console.log(userInfo);
 
     useEffect(() => {
         if(productId) {

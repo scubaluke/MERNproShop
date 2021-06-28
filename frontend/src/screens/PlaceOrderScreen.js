@@ -11,7 +11,6 @@ import { clearCart } from '../actions/cartActions';
 export default function PlaceOrderScreen({history}) {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
-    console.log('cart in  placeOrderScreen', cart);
   
 
 // calculate prices:
