@@ -1,20 +1,4 @@
-main {
-  min-height: 80vh;
-}
-h3 {
-  padding: 1rem 0;
-}
-h1 {
-  font-size: 1.8rem;
-  padding: 1rem 0;
-}
-h2 {
-  font-size: 1.4rem;
-  padding: 0.5rem 0;
-}
-.rating span {
-  margin: 0.1rem;
-}
+
 /* Missing  Qty bug fix: */
 @media only screen and (min-width: 768px) and (max-width: 1200px) {
  
@@ -22,7 +6,66 @@ h2 {
     min-width: 105px;
   }
  
-  /* .product-page-section:nth-child(3) {
+  .product-page-section:nth-child(3) {
     margin: 20px 0 0 50%;
-  } */
+  }
+} 
+
+main {
+  min-height: 80vh;
+}
+
+h3 {
+  padding: 1rem 0;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
+
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+
+.carousel-caption h2 {
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.253);
+  box-shadow: 10px -2px 20px #ddd;
+  border-radius: 3%;
+}
+
+.carousel img {
+  height: 200px;
+  /* padding: 30px;
+  margin: 40px; */
+  border-radius: 5%;
+  box-shadow: 1px 1px 5px rgb(150, 150, 150);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel a {
+  margin: 0 auto;
+}
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 2.5vw;
+  }
 }
